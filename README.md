@@ -201,6 +201,6 @@ GET /download?python=3.8
 Важно, всё то, что вы делали должно находится в папке.
 ```
 Примерное название:
-username_[id]
+username_id
 ```
 ![pull requests](https://i.imgur.com/xPYvnj1.png)
