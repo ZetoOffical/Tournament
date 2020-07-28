@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 @app.route('/sort', methods=['POST'])
 def sort():
-	a = {success: True,
-    data: [{"_id": "80808080", "name": "Anton"}, {"_id": "90909090", "name": "Gosha"}]}
+	a = {'success': True,
+    'data': [{"_id": "80808080", "name": "Anton"}, {"_id": "90909090", "name": "Gosha"}]}
 	resp = {'success': True, 'data': sorted(a['data'], key=lambda x: int(x['_id']))}
 	return jsonify(resp)
 
