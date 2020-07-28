@@ -20,7 +20,7 @@ def parce():
     else:
         r = requests.get('https://www.python.org/dev/peps/pep-0008/', headers=head)
         soup = BS(r.text, 'html.parser')
-        out = []
+        # out = [] я неуспееееел
 
         tegs = [tag.name for tag in soup.html.findAll()]
 
