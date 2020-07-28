@@ -14,7 +14,6 @@
 ###### Example
 
 ```sh
-
 ========REQUEST
 
 POST /sort
@@ -28,7 +27,7 @@ Content-Type: application/json
 
 {
     success: true,
-    data: [{"_id": "80808080", "name": "Anton"}, {"_id": "90909090", "name": "Gosha"}]
+    data: [{"_id": "90909090", "name": "Anton"}, {"_id": "80808080", "name": "Gosha"}]
 }
 ```
 
