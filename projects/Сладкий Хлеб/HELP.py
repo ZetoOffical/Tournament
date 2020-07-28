@@ -1,16 +1,16 @@
 import requests
 from flask import Flask, request
 from bs4 import BeautifulSoup as BS
-from itertools import groupby
-
 
 
 app = Flask(__name__)
 head = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0'}
 
+
 @app.route('/', methods=['GET'])
 def hello_world():
     return 'HELP'
+
 
 @app.route('/parse', methods=['GET', 'POST'])
 def parce():
@@ -34,9 +34,6 @@ def parce():
             teg_cont_search = []
             if search_var in str(teg_info):
                 teg_cont_search.append()
-
-
-
 
 
 app.run(host='0.0.0.0')
