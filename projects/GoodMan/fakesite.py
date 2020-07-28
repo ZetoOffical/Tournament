@@ -11,15 +11,5 @@ def sort():
 	return jsonify(resp)
 
 
-@app.route('/search', methods=['POST'])
-def search():
-	pass
-
-
-@app.route('/parse', methods=['POST'])
-def parse():
-	pass
-
-
 if __name__ == '__main__':
 	app.run(debug=True)
