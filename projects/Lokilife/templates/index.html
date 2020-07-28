@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Template</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="content">
+                <form method="POST" id="form">
+                    {% csrf_token %}
+                    <input id="but" type="submit" value="Accept">
+                </form>
+                <p id="result">Увы, но пусто.</p>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+$("#but").click = function(e){
+    e.preventDefault();
+    $.ajax({
+        url: '/',
+        dataType: 'json',
+        data: JSON.stringify(
+        {
+            asc: true,
+            array: [{"_id": "80808080", "name": "Gosha"}, {"_id": "90909090", "name": "Anton"}],
+            csrfmiddlewaretoken: "{{ csrf_token }}"
+        }),
+        success: function(data) {
+            $("#result").text = data;
+        }
+    });
+}
+        </script>
+    </body>
+</html>
