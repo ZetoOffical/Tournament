@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 
-import json
 import bs4
 import requests
 
@@ -52,7 +51,6 @@ def search():
 
 @app.route('/parse', methods=['GET'])
 def parse():
-    json_ = request.json
     search_ = ''
     if 'search' in request.args.keys():
         search_ = request.args['search']
