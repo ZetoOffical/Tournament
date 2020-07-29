@@ -20,5 +20,7 @@ from tournamentapp import views
 
 urlpatterns = [
     path('', views.index, name="home"),
-    path('admin/', admin.site.urls),
+    path('sort', views.tasks.sort),
+    path('search', views.tasks.search),
+    path('parse',views.tasks.parse),
 ]
