@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Template</title>
+        <style>
+            p {
+                padding: 0;
+                margin: 0;
+            }
+            strong {
+                font-size: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="content">
+                <div id="first-task">
+                    <h2>Первое задание.</h2>
+                    <p>На endpoint /sort отправляется POST запрос с json телом,</p>
+                    <p>в этом теле есть массив, который нужно отсортировать</p>
+                    <p>и тип сортировки - восходящая или снисходящая сортировка</p><br>
+                    <p>{<br>
+                        asc: true, // Это будет зависеть от галочки<br>
+                        array: [{"_id": "80808080", "name": "Gosha"}, {"_id": "90909090", "name": "Anton"}],<br>
+                    }</p><br>
+                    <form method="POST" id="form">
+                        Reversed <input id="first-checkbox" type="checkbox"><br>
+                        <input id="but-first" type="submit" value="Accept">
+                    </form>
+                    <p id="result-first">Результат: Увы, но пусто.</p>
+                </div>
+                <div id="second-task">
+                    <h2>Второе задание.</h2>
+                    <p>Строгий и не строгий поиск в строке</p><br>
+                    <form method="POST" id="form">
+                        <input id="text" type="text" placeholder="Текст"><br>
+                        <input id="search" type="text" placeholder="Строка для поиска"><br>
+                        Строгий поиск <input id="second-checkbox" type="checkbox"><br>
+                        <input id="but-second" type="submit" value="Поиск">
+                    </form>
+                    <p id="result-second">Результат: Увы, но пусто. (нажми на кнопку)</p>
+                </div>
+                <div id="third-task">
+                    <h2>Третье задание.</h2>
+                    <p>Парсер сайта https://www.python.org/dev/peps/pep-0008/</p><br>
+                    <form methon="POST" id="form">
+                        <input id="parse-text" type="text" placeholder="Текст для поиска"><br>
+                        <input id="but-third" type="submit" value="Поиск">
+                    </form>
+                    <div id="div-third">Ты ещё не нажал на кнопку чтобы видеть результат</div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+$("#but-first").click(
+    function(){
+        $.ajax({
+            url: '/sort',
+            type:'POST',
+            data: {
+                json: JSON.stringify({
+                        asc: $("#first-checkbox").is(":checked") ? true : false,
+                        array: [{"_id": "80808080", "name": "Gosha"}, {"_id": "90909090", "name": "Anton"}],
+                    }),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(data) {
+                $("#result-first").text("Результат: "+data);
+            },
+            error: function(a,b){
+                alert("Error! "+b)
+                console.error(a);
+            }
+        });
+        return false;
+    }
+);
+$("#but-second").click(
+    function(){
+        $.ajax({
+            url: '/search',
+            type:'POST',
+            data: {
+                json: JSON.stringify({
+                    text:$("#text").val(),
+                    search:$("#search").val(),
+                    exact:$("#second-checkbox").is(":checked") ? true : false,
+                }),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(data){
+                $("#result-second").html("Результат: "+data);
+            },
+            error: function(a,b){
+                alert("Error! "+b);
+                console.error(a);
+            }
+        });
+        return false;
+    }
+);
+$("#but-third").click(
+    function(){
+        $.ajax({
+            url: '/parse',
+            type:'POST',
+            data: {
+                json: JSON.stringify({
+                    search:$("#parse-text").val()
+                }),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(data){
+                $("#div-third").html(data);
+            },
+            error: function(a,b){
+                alert("Error! "+b);
+                console.error(a);
+            }
+        });
+        return false;
+    }
+);
+        </script>
+    </body>
+</html>
